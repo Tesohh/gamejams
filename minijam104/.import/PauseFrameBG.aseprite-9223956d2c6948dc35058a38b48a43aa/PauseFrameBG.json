@@ -1,0 +1,22 @@
+{ "frames": [
+   {
+    "filename": "PauseFrameBG.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 90, "h": 160 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 90, "h": 160 },
+    "sourceSize": { "w": 90, "h": 160 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "PauseFrameBG.png",
+  "format": "RGBA8888",
+  "size": { "w": 90, "h": 160 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}

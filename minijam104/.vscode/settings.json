@@ -1,0 +1,8 @@
+{
+	"files.exclude": {
+		"addons": true,
+		"default_env.tres": true,
+		"export_presets.cfg": true,
+		"project.godot": true
+	}
+}

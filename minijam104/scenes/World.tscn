@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://bg/gamebg.aseprite" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/World.gd" type="Script" id=2]
+[ext_resource path="res://ui/YouGotMail.aseprite" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/Exclamation.gd" type="Script" id=4]
+[ext_resource path="res://ui/icons/leftclick.png" type="Texture" id=5]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=6]
+[ext_resource path="res://ui/Tooltip.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 123, 184 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.1, 1, 0.1 ),
+"update": 0,
+"values": [ Vector2( 123, 184 ), Vector2( 123, 187 ), Vector2( 123, 184 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[node name="World" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 90, 160 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL2JnL2JnLmFzZXByaXRlCmxheWVyfD0Kb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
+}
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Exclamation" type="AnimatedSprite" parent="Player"]
+visible = false
+position = Vector2( 123, 184 )
+frames = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Exclamation"]
+anims/RESET = SubResource( 2 )
+anims/default = SubResource( 1 )
+
+[node name="FishWaitTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FishCatchTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Tooltip" type="HBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 33.0
+margin_top = 303.0
+margin_right = 167.0
+margin_bottom = 312.0
+theme = ExtResource( 6 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Tooltip"]
+margin_right = 8.0
+margin_bottom = 9.0
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Tooltip"]
+margin_left = 12.0
+margin_right = 12.0
+margin_bottom = 9.0
+
+[node name="Tween" type="Tween" parent="Tooltip"]
+
+[connection signal="timeout" from="FishWaitTimer" to="." method="_on_FishWaitTimer_timeout"]
+[connection signal="timeout" from="FishCatchTimer" to="." method="_on_FishCatchTimer_timeout"]

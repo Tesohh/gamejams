@@ -1,0 +1,22 @@
+{ "frames": [
+   {
+    "filename": "watertile.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 20, "h": 16 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 16 },
+    "sourceSize": { "w": 20, "h": 16 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "watertile.png",
+  "format": "RGBA8888",
+  "size": { "w": 20, "h": 16 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}
