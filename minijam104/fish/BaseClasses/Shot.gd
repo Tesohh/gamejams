@@ -27,8 +27,9 @@ func finalize(_fish):
 
 func shoot():
 	for s in fish.scene.get_node("Rotater").get_children():
+#		print("SHOOOOOT SHOT")
 		var bullet = bullet_scene.instance()
-		utl.current().add_child(bullet)
+		utl.current().get_node("Hell/Bullets").add_child(bullet)
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation
 		

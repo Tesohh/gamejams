@@ -6,7 +6,7 @@ var fish_script
 var fish_slide_index = 1
 
 func _ready():
-	$CollisionShape2D.shape.radius = fish_script.radius * 2
+	$CollisionShape2D.shape.radius = fish_script.radius * 4
 	yield(get_tree().create_timer(0.2), "timeout")
 	if fish_script.slide:
 		$Tween.interpolate_property(self, "position", position, utl.current().get_node("Hell/FishSlide1").position, fish_script.slide_speed)
@@ -22,6 +22,8 @@ func _on_CatchTimer_timeout():
 
 
 func _on_ShootTimer_timeout():
+#	print("FishSHotooot")
+#	print(fish_script.shot)
 	fish_script.shot.shoot()
 
 

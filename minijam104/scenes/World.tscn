@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://bg/gamebg.aseprite" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/World.gd" type="Script" id=2]
@@ -11,6 +11,12 @@
 [ext_resource path="res://bg/hellbg.aseprite" type="SpriteFrames" id=9]
 [ext_resource path="res://ui/icons/hook.png" type="Texture" id=10]
 [ext_resource path="res://scenes/Hook.gd" type="Script" id=11]
+[ext_resource path="res://scenes/Hell.gd" type="Script" id=12]
+[ext_resource path="res://scenes/CameraShaker.gd" type="Script" id=13]
+[ext_resource path="res://bg/bg_ext.png" type="Texture" id=14]
+[ext_resource path="res://ui/Pixolletta8px.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://scenes/HealthRecap.gd" type="Script" id=16]
+[ext_resource path="res://eltesohh.png" type="Texture" id=17]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -56,7 +62,15 @@ tracks/1/keys = {
 "values": [  ]
 }
 
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 15 )
+
 [sub_resource type="CircleShape2D" id=3]
+radius = 3.0
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 15 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -68,6 +82,18 @@ frames = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL2JnL2JnLmFzZXByaXRlCmxheWVyfD0Kb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
 }
+
+[node name="BgExt" type="Sprite" parent="AnimatedSprite"]
+position = Vector2( -60, -31.5 )
+scale = Vector2( 0.5, 0.888889 )
+texture = ExtResource( 14 )
+offset = Vector2( 15, 35.4375 )
+
+[node name="BgExt2" type="Sprite" parent="AnimatedSprite"]
+position = Vector2( 45, -31.5 )
+scale = Vector2( 0.5, 0.888889 )
+texture = ExtResource( 14 )
+offset = Vector2( 15, 35.4375 )
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource( 8 )
@@ -88,7 +114,169 @@ one_shot = true
 [node name="FishCatchTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HealthRecap" type="Control" parent="."]
+visible = false
+theme = ExtResource( 6 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HealthRecap"]
+margin_right = 180.0
+margin_bottom = 320.0
+color = Color( 0.152941, 0.152941, 0.266667, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Caught" type="VBoxContainer" parent="HealthRecap"]
+visible = false
+margin_top = 139.0
+margin_right = 180.0
+margin_bottom = 179.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HealthRecap/Caught"]
+margin_right = 180.0
+margin_bottom = 24.0
+texture = ExtResource( 17 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HealthRecap/Caught"]
+margin_top = 28.0
+margin_right = 180.0
+margin_bottom = 37.0
+text = "Caught Tequila Splitfin"
+align = 1
+
+[node name="Health" type="HBoxContainer" parent="HealthRecap"]
+visible = false
+margin_left = 34.0
+margin_top = 146.0
+margin_right = 90.0
+margin_bottom = 162.0
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="TextureRect" parent="HealthRecap/Health"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+
+[node name="2" type="TextureRect" parent="HealthRecap/Health"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+
+[node name="3" type="TextureRect" parent="HealthRecap/Health"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+
+[node name="GameOver" type="Label" parent="HealthRecap"]
+visible = false
+margin_left = 1.0
+margin_top = 126.0
+margin_right = 179.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 4 )
+text = "GAME OVER"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthRecap/GameOver"]
+margin_left = 68.0
+margin_top = 43.0
+margin_right = 110.0
+margin_bottom = 83.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="HealthRecap/GameOver/VBoxContainer"]
+margin_right = 42.0
+margin_bottom = 15.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="HealthRecap/GameOver/VBoxContainer"]
+margin_top = 19.0
+margin_right = 42.0
+margin_bottom = 34.0
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="HealthRecap/GameOver"]
+modulate = Color( 1, 1, 1, 0.270588 )
+margin_left = 151.0
+margin_top = 166.0
+margin_right = 175.0
+margin_bottom = 190.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win" type="Label" parent="HealthRecap"]
+visible = false
+margin_left = 1.0
+margin_top = 126.0
+margin_right = 179.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 4 )
+text = "YOU WON!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthRecap/Win"]
+margin_left = 68.0
+margin_top = 43.0
+margin_right = 110.0
+margin_bottom = 83.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="HealthRecap/Win/VBoxContainer"]
+margin_right = 42.0
+margin_bottom = 15.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="HealthRecap/Win/VBoxContainer"]
+margin_top = 19.0
+margin_right = 42.0
+margin_bottom = 34.0
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="HealthRecap/Win"]
+modulate = Color( 1, 1, 1, 0.270588 )
+margin_left = 151.0
+margin_top = 166.0
+margin_right = 175.0
+margin_bottom = 190.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="HealthRecap"]
+
 [node name="Hell" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Hell"]
 position = Vector2( 90, 160 )
@@ -120,6 +308,31 @@ shape = SubResource( 3 )
 [node name="Sprite" type="Sprite" parent="Hell/Hook"]
 texture = ExtResource( 10 )
 
+[node name="Tween" type="Tween" parent="Hell/Hook"]
+pause_mode = 2
+
+[node name="Tween" type="Tween" parent="Hell"]
+pause_mode = 2
+
+[node name="Bullets" type="Node2D" parent="Hell"]
+
+[node name="FishName" type="Label" parent="Hell"]
+visible = false
+margin_left = 1.0
+margin_top = 152.0
+margin_right = 180.0
+margin_bottom = 169.0
+custom_fonts/font = SubResource( 5 )
+text = "FISH"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Hell/FishName"]
+pause_mode = 2
+
 [node name="Tooltip" type="HBoxContainer" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 33.0
@@ -145,5 +358,23 @@ margin_bottom = 9.0
 
 [node name="Tween" type="Tween" parent="Tooltip"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
+position = Vector2( 90, 160 )
+current = true
+script = ExtResource( 13 )
+
+[node name="Tween" type="Tween" parent="Camera2D"]
+
 [connection signal="timeout" from="FishWaitTimer" to="." method="_on_FishWaitTimer_timeout"]
 [connection signal="timeout" from="FishCatchTimer" to="." method="_on_FishCatchTimer_timeout"]
+[connection signal="pressed" from="HealthRecap/GameOver/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="HealthRecap/GameOver/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="HealthRecap/Win/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="HealthRecap/Win/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="tween_completed" from="HealthRecap/Tween" to="HealthRecap" method="_on_Tween_tween_completed"]
+[connection signal="area_entered" from="Hell/Hook" to="Hell/Hook" method="_on_Hook_area_entered"]
+[connection signal="body_entered" from="Hell/Hook" to="Hell/Hook" method="_on_Hook_body_entered"]
+[connection signal="fish_catch" from="Hell/Hook" to="." method="_on_Hook_fish_catch"]
+[connection signal="hit" from="Hell/Hook" to="." method="_on_Hook_hit"]
+[connection signal="tween_completed" from="Hell/Tween" to="Hell" method="_on_Tween_tween_completed"]

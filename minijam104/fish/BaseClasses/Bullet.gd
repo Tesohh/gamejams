@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Bullet
 
 # https://www.youtube.com/watch?v=Z2TaFnN7cdU&list=LL&index=2
 

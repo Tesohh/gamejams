@@ -1,0 +1,22 @@
+{ "frames": [
+   {
+    "filename": "bg_ext.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 30, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 30, "h": 180 },
+    "sourceSize": { "w": 30, "h": 180 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3-beta14-x64",
+  "image": "bg_ext.png",
+  "format": "RGBA8888",
+  "size": { "w": 30, "h": 180 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}
